@@ -12,20 +12,10 @@ public static class NDB_Main
 {
     public static DiscordSocketClient? _client;
     public static CommandService? _commands;
-    private static IConfiguration? _config;
-    private static IServiceProvider? _services;
+    public static IConfiguration? _config;
+    public static IServiceProvider? _services;
 
     private static String stringPrefix = "+";
-
-    public static Task minLoad(String libraryToLoad) // loads minloader (MinLoader.cs)
-    {
-        return _commands.AddModulesAsync(Assembly.LoadFrom(libraryToLoad), _services);
-    }
-
-    public static Task minUnload() // unloads minloader (MinLoader.cs)
-    {
-        return _commands.RemoveModuleAsync(_commands.Modules.ElementAt(0));
-    }
 
     public static void LogMeOut()
     {
@@ -51,7 +41,14 @@ public static class NDB_Main
 
         AttachHandlers();
 
-        await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
+        if (_config["loaderlib"] == null)
+        {
+            await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
+        } else
+        {
+            await _commands.AddModulesAsync(Assembly.LoadFrom(_config["loaderlib"]), _services);
+        }
+        
 
         if (_config["stringprefix"] != null) { stringPrefix = _config["stringprefix"]; }
 

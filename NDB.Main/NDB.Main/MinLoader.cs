@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NDB.Main
 {
@@ -13,19 +14,19 @@ namespace NDB.Main
 
         [Command("minload")]
         [Summary("OWNER: A minimal loading command.")]
-        [Remarks("minload (command)")]
+        [Remarks("minload <library>")]
         public async Task MinLoadCommand(String libraryToLoad)
         {
-            await NDB_Main.minLoad(libraryToLoad);
+            await NDB_Main._commands.AddModulesAsync(Assembly.LoadFrom(libraryToLoad), NDB_Main._services);
             await ReplyAsync($"Attempted to load {libraryToLoad}...");
         }
 
         [Command("minunload")]
         [Summary("OWNER: A minimal unloading command.")]
-        [Remarks("minunload (command)")]
+        [Remarks("minunload")]
         public async Task MinUnloadCommand()
         {
-            await NDB_Main.minUnload();
+            await NDB_Main._commands.RemoveModuleAsync(NDB_Main._commands.Modules.ElementAt(0));
             await ReplyAsync($"Attempted to unload MinLoader.");
         }
     }
