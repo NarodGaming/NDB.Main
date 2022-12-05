@@ -88,9 +88,10 @@ public static class NDB_Main
     private static async Task CommandHandler(SocketMessage message)
     {
         SocketUserMessage? userMessage = message as SocketUserMessage;
-        SocketCommandContext context = new SocketCommandContext(_client, userMessage);
 
         if (userMessage == null || userMessage.Author.IsBot) { return; }
+
+        SocketCommandContext context = new SocketCommandContext(_client, userMessage);
 
         int pos = 0;
 

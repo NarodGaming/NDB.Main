@@ -18,7 +18,7 @@ namespace NDB.Main
         public async Task MinLoadCommand(String libraryToLoad)
         {
             await NDB_Main._commands.AddModulesAsync(Assembly.LoadFrom(libraryToLoad), NDB_Main._services);
-            await ReplyAsync($"Attempted to load {libraryToLoad}...");
+            await ReplyAsync($"Loaded library: {libraryToLoad}...");
         }
 
         [Command("minunload")]
@@ -27,7 +27,7 @@ namespace NDB.Main
         public async Task MinUnloadCommand()
         {
             await NDB_Main._commands.RemoveModuleAsync(NDB_Main._commands.Modules.ElementAt(0));
-            await ReplyAsync($"Attempted to unload MinLoader.");
+            await ReplyAsync($"Unloaded MinLoader, if you haven't got a different loader activated, you won't be able to load / unload new modules anymore.");
         }
     }
 }
