@@ -24,10 +24,20 @@ namespace NDB.Main
         [Command("minunload")]
         [Summary("OWNER: A minimal unloading command.")]
         [Remarks("minunload")]
-        public async Task MinUnloadCommand()
+        public async Task MinUnloadCommand(String libraryToUnload)
         {
-            await NDB_Main._commands.RemoveModuleAsync(NDB_Main._commands.Modules.ElementAt(0));
-            await ReplyAsync($"Unloaded MinLoader, if you haven't got a different loader activated, you won't be able to load / unload new modules anymore.");
+            bool hasUnloaded = false;
+            foreach (ModuleInfo module in NDB_Main._commands.Modules)
+            {
+                if (module.Name == libraryToUnload) { await NDB_Main._commands.RemoveModuleAsync(module); hasUnloaded = true; break; }
+            }
+            if (hasUnloaded)
+            {
+                await ReplyAsync($"Unloaded {libraryToUnload}.");
+            } else
+            {
+                await ReplyAsync($"Failed to unload {libraryToUnload}.");
+            }
         }
     }
 }
