@@ -60,9 +60,9 @@ public static class NDB_Main
         await Task.Delay(Timeout.Infinite);
     }
 
-    private static void AddServices()
+    public static void AddServices(ServiceCollection? collection = null)
     {
-        ServiceCollection collection = new ServiceCollection();
+        if(collection == null) { collection = new(); }
 
         collection.AddSingleton(_client);
         collection.AddSingleton(_commands);
