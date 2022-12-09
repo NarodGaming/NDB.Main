@@ -15,6 +15,8 @@ public static class NDB_Main
     public static IConfiguration? _config;
     public static IServiceProvider? _services;
 
+    public static List<Type>? _lateServices;
+
     private static String stringPrefix = "+";
 
     public static void LogMeOut()
@@ -35,6 +37,7 @@ public static class NDB_Main
         DiscordSocketConfig socketConfig = new() { GatewayIntents = GatewayIntents.All };
         _client= new DiscordSocketClient(socketConfig);
         _commands= new CommandService();
+        _lateServices = new();
         _config = BuildConfig();
 
         AddServices();
@@ -60,14 +63,22 @@ public static class NDB_Main
         await Task.Delay(Timeout.Infinite);
     }
 
-    public static void AddServices(ServiceCollection? collection = null)
+    public static void AddServices()
     {
-        if(collection == null) { collection = new(); }
+        ServiceCollection collection = new();
 
         collection.AddSingleton(_client);
         collection.AddSingleton(_commands);
 
         collection.AddSingleton(_config);
+
+        if(_lateServices.Count != 0) // if we need to add a late service
+        {
+            foreach (var item in _lateServices) // for each late service
+            {
+                collection.AddSingleton(item); // add the late service
+            }
+        }
 
         _services = collection.BuildServiceProvider();
     }
