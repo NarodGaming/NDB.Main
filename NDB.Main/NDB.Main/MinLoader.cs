@@ -13,7 +13,7 @@ namespace NDB.Main
     {
 
         [Command("minload")]
-        [Summary("OWNER: A minimal loading command.")]
+        [Summary("OWNER: A minimal loading command, only supports loading commands (not services).")]
         [Remarks("minload <library>")]
         public async Task MinLoadCommand(String libraryToLoad)
         {
@@ -22,8 +22,8 @@ namespace NDB.Main
         }
 
         [Command("minunload")]
-        [Summary("OWNER: A minimal unloading command.")]
-        [Remarks("minunload")]
+        [Summary("OWNER: A minimal unloading command, only supports unloading commands (not services).")]
+        [Remarks("minunload <library>")]
         public async Task MinUnloadCommand(String libraryToUnload)
         {
             bool hasUnloaded = false;

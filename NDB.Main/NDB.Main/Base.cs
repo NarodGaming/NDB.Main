@@ -17,7 +17,7 @@ public static class NDB_Main
 
     public static List<Type>? _lateServices;
 
-    private static String stringPrefix = "+";
+    public static String stringPrefix = "+";
 
     public static void LogMeOut()
     {
@@ -106,7 +106,7 @@ public static class NDB_Main
 
         int pos = 0;
 
-        if (userMessage.HasStringPrefix(_config["stringPrefix"], ref pos) || userMessage.HasMentionPrefix(_client.CurrentUser, ref pos))
+        if (userMessage.HasStringPrefix(stringPrefix, ref pos) || userMessage.HasMentionPrefix(_client.CurrentUser, ref pos))
         {
             IResult result = await _commands.ExecuteAsync(context, pos, _services);
         }
