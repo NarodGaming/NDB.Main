@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Numerics;
-using System.Reflection;
-using System.Threading;
+﻿using System.Reflection;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
