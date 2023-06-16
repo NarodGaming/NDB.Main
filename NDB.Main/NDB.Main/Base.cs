@@ -15,6 +15,7 @@ public static class NDB_Main
     public static List<Type>? _lateServices;
 
     public static String stringPrefix = "+";
+    public static DateTime startTime = DateTime.Now;
 
     public static void LogMeOut()
     {
