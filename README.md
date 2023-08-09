@@ -41,9 +41,9 @@ A quick explanation of each:
 - Token: This is your token provided by the [Discord Developer Portal](https://discord.com/developers/applications/)
 - Presence: This appears underneath your bot in Discord. It will show as a status message.
 - StringPrefix: This is how your bot should be triggered. Aka if you have a command caled "help" and a string prefix of "+", you would use "+help" to trigger your command.
-- LoaderLib: If you're using NDB.Loader or a different loader, put the file name here.
+- LoaderLib: If you're using [NDB.Loader](https://github.com/NarodGaming/NDB.Loader) or a different loader, put the file name here.
 
-Certain other libraries may also have additional configuration to add, such as NDB.Library.Embeds, which also expects "botname" and "embedcolour" to be set.
+Certain other libraries may also have additional configuration to add, such as [NDB.Library.Embeds](https://github.com/NarodGaming/NDB.Library.Embeds), which also expects "botname" and "embedcolour" to be set.
 
 After this is all set-up, run NDB.Main.exe and enjoy! If you've added your bot to a server, you should see the bot come online with your given presence.
 
